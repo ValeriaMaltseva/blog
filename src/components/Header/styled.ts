@@ -8,6 +8,7 @@ const { Header: AntHeader } = AntLayout;
 export const Header = styled(AntHeader)`
     display: flex;
     align-items: center;
+    padding: 10px 30px;
 `;
 
 export const Logo = styled.a`

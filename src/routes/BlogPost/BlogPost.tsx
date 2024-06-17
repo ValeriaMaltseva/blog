@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Typography } from 'antd';
 
 import { useAppDispatch, useAppSelector } from 'hooks';
 
@@ -12,6 +13,8 @@ import { fetchPostById } from 'store/posts/api';
 
 import Loader from 'components/Loader';
 import ErrorInfo from 'components/ErrorInfo';
+
+const { Title, Text } = Typography;
 
 const BlogPost = () => {
     const { id } = useParams();
@@ -42,8 +45,8 @@ const BlogPost = () => {
 
             {postsStatus === SUCCEEDED && (
                 <div>
-                    <h2>{post.title}</h2>
-                    <p>{post.body}</p>
+                    <Title level={2}>{post.title}</Title>
+                    <Text italic>{post.body}</Text>
                 </div>
             )}
         </div>
