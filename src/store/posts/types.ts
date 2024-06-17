@@ -1,3 +1,5 @@
+import { Idle, Loading, Success, Failure } from '../types';
+
 export interface Post {
     userId: number;
     id: number;
@@ -7,7 +9,7 @@ export interface Post {
 
 export interface PostsState {
     posts: Post[];
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    status: Idle | Loading | Success | Failure;
     error: string | null;
 }
 

@@ -1,11 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Post, PostsState } from './types';
+
+import { FAILED, IDLE, LOADING, SUCCEEDED } from 'constants/requestStates';
 
 import { fetchPosts, fetchPostById } from './api';
 
+import { Post, PostsState } from './types';
+
 const initialState: PostsState = {
     posts: [],
-    status: 'idle',
+    status: IDLE,
     error: null,
 };
 
@@ -16,23 +19,23 @@ export const slice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchPosts.pending, (state) => {
-                state.status = 'loading';
+                state.status = LOADING;
             })
             .addCase(fetchPosts.fulfilled, (state, action: PayloadAction<Post[]>) => {
-                state.status = 'succeeded';
+                state.status = SUCCEEDED;
 
                 state.posts = action.payload;
             })
             .addCase(fetchPosts.rejected, (state, action) => {
-                state.status = 'failed';
+                state.status = FAILED;
 
                 state.error = action.error.message || null;
             })
             .addCase(fetchPostById.pending, (state) => {
-                state.status = 'loading';
+                state.status = LOADING;
             })
             .addCase(fetchPostById.fulfilled, (state, action: PayloadAction<Post>) => {
-                state.status = 'succeeded';
+                state.status = SUCCEEDED;
 
                 const existingPost = state.posts.find((post) => post.id === action.payload.id);
 
@@ -41,7 +44,7 @@ export const slice = createSlice({
                 }
             })
             .addCase(fetchPostById.rejected, (state, action) => {
-                state.status = 'failed';
+                state.status = FAILED;
 
                 state.error = action.error.message || null;
             });

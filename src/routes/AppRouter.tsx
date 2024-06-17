@@ -1,10 +1,10 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
+import ROUTES from 'constants/routes';
+
 import Home from 'routes/Home';
 import BlogPost from 'routes/BlogPost';
-
-import ROUTES from 'constants/routes';
 
 export const AppRouter = createBrowserRouter([
     {

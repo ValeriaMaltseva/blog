@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'hooks';
 
+import { FAILED, IDLE, LOADING, SUCCEEDED } from 'constants/requestStates';
+
+import { toBlogPost } from 'helpers/navigation';
+
 import { AppDispatch } from 'configureStore';
 
 import { selectAllPosts, selectPostsStatus, selectPostsError } from 'store/posts/selectors';
 import { fetchPosts } from 'store/posts/api';
-
-import { toBlogPost } from 'helpers/navigation';
-
 import { Post } from 'store/posts/types';
 
 const Home = () => {
@@ -20,16 +21,18 @@ const Home = () => {
     const postsError = useAppSelector(selectPostsError);
 
     useEffect(() => {
-        if (postsStatus === 'idle') {
+        if (postsStatus === IDLE) {
             dispatch(fetchPosts());
         }
     }, [dispatch, postsStatus]);
 
     return (
         <div>
-            {postsStatus === 'loading' && <div>Loading posts...</div>}
-            {postsStatus === 'failed' && <div>Error: {postsError}</div>}
-            {postsStatus === 'succeeded' && (
+            {postsStatus === LOADING && <div>Loading posts...</div>}
+
+            {postsStatus === FAILED && <div>Error: {postsError}</div>}
+
+            {postsStatus === SUCCEEDED && (
                 <ul>
                     {posts.map((post: Post) => (
                         <li key={post.id}>
