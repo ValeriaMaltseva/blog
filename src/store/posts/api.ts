@@ -3,8 +3,15 @@ import axios from 'axios';
 
 import { Post } from './types';
 
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (limit: number = 10) => {
-    const response = await axios.get<Post[]>(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}`);
+type FetchPostsProps = {
+    limit: number;
+    start: number;
+};
+
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async ({ start = 0, limit = 10 }: FetchPostsProps) => {
+    const response = await axios.get<Post[]>(
+        `https://jsonplaceholder.typicode.com/posts?_start=${start}&_limit=${limit}`
+    );
 
     return response.data;
 });

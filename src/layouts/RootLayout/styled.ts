@@ -9,5 +9,6 @@ export const Layout = styled(AntLayout)`
 `;
 
 export const Content = styled(AntContent)`
+    padding: 24px 30px;
     overflow-y: scroll;
 `;
