@@ -1,16 +1,16 @@
 import React from 'react';
-import { Layout } from 'antd';
+
+import Header from 'components/Header';
+import Footer from 'components/Footer';
 
 import * as S from './styled';
-
-const { Header, Footer, Content } = Layout;
 
 const RootLayout = ({ children }: React.PropsWithChildren) => {
     return (
         <S.Layout>
-            <Header>Header</Header>
-            <Content>{children}</Content>
-            <Footer>Footer</Footer>
+            <Header />
+            <S.Content>{children}</S.Content>
+            <Footer />
         </S.Layout>
     );
 };
