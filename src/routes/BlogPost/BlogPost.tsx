@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Typography } from 'antd';
+import { Typography, Image } from 'antd';
 
 import { useAppDispatch, useAppSelector } from 'hooks';
 
@@ -13,6 +13,10 @@ import { fetchPostById } from 'store/posts/api';
 
 import Loader from 'components/Loader';
 import ErrorInfo from 'components/ErrorInfo';
+
+import mountainsImg from './img/mountains.webp';
+
+import * as S from './styled';
 
 const { Title, Text } = Typography;
 
@@ -44,10 +48,15 @@ const BlogPost = () => {
             {postsStatus === FAILED && postsError && <ErrorInfo message={postsError} />}
 
             {postsStatus === SUCCEEDED && (
-                <div>
-                    <Title level={2}>{post.title}</Title>
-                    <Text italic>{post.body}</Text>
-                </div>
+                <>
+                    <div>
+                        <Title level={2}>{post.title}</Title>
+                        <Text italic>{post.body}</Text>
+                    </div>
+                    <S.ImageContainer>
+                        <Image src={mountainsImg} width={300} alt="mountain" />
+                    </S.ImageContainer>
+                </>
             )}
         </div>
     );
