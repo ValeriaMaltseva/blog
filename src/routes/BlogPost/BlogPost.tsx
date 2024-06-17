@@ -10,6 +10,9 @@ import { AppDispatch, RootState } from 'configureStore';
 import { selectPostById, selectPostsError, selectPostsStatus } from 'store/posts/selectors';
 import { fetchPostById } from 'store/posts/api';
 
+import Loader from 'components/Loader';
+import ErrorInfo from 'components/ErrorInfo';
+
 const BlogPost = () => {
     const { id } = useParams();
 
@@ -33,9 +36,9 @@ const BlogPost = () => {
 
     return (
         <div>
-            {postsStatus === LOADING && <div>Loading post...</div>}
+            {postsStatus === LOADING && <Loader />}
 
-            {postsStatus === FAILED && <div>Error: {postsError}</div>}
+            {postsStatus === FAILED && postsError && <ErrorInfo message={postsError} />}
 
             {postsStatus === SUCCEEDED && (
                 <div>

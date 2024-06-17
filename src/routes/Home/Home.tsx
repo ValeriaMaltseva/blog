@@ -13,6 +13,9 @@ import { selectAllPosts, selectPostsStatus, selectPostsError } from 'store/posts
 import { fetchPosts } from 'store/posts/api';
 import { Post } from 'store/posts/types';
 
+import Loader from 'components/Loader';
+import ErrorInfo from 'components/ErrorInfo';
+
 const Home = () => {
     const dispatch = useAppDispatch<AppDispatch>();
 
@@ -28,9 +31,9 @@ const Home = () => {
 
     return (
         <div>
-            {postsStatus === LOADING && <div>Loading posts...</div>}
+            {postsStatus === LOADING && <Loader />}
 
-            {postsStatus === FAILED && <div>Error: {postsError}</div>}
+            {postsStatus === FAILED && postsError && <ErrorInfo message={postsError} />}
 
             {postsStatus === SUCCEEDED && (
                 <ul>
