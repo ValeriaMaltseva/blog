@@ -1,6 +1,10 @@
 import React from 'react';
 
-const ErrorInfo = ({ message }: { message: string }) => {
+type ErrorInfoProps = {
+    message: string;
+};
+
+const ErrorInfo = ({ message }: ErrorInfoProps) => {
     return <div>Error: {message}</div>;
 };
 

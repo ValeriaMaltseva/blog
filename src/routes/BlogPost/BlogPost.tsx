@@ -6,8 +6,6 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 
 import { FAILED, IDLE, LOADING, SUCCEEDED } from 'constants/requestStates';
 
-import { AppDispatch, RootState } from 'configureStore';
-
 import { selectPostById, selectPostsError, selectPostsStatus } from 'store/posts/selectors';
 import { fetchPostById } from 'store/posts/api';
 
@@ -18,16 +16,14 @@ import mountainsImg from './img/mountains.webp';
 
 import * as S from './styled';
 
-const { Title, Text } = Typography;
-
 const BlogPost = () => {
     const { id } = useParams();
 
     const postId = parseInt(id!, 10);
 
-    const dispatch = useAppDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
 
-    const post = useAppSelector((state: RootState) => selectPostById(state, postId));
+    const post = useAppSelector(selectPostById(postId));
     const postsStatus = useAppSelector(selectPostsStatus);
     const postsError = useAppSelector(selectPostsError);
 
@@ -50,8 +46,8 @@ const BlogPost = () => {
             {postsStatus === SUCCEEDED && (
                 <>
                     <div>
-                        <Title level={2}>{post.title}</Title>
-                        <Text italic>{post.body}</Text>
+                        <Typography.Title level={2}>{post.title}</Typography.Title>
+                        <Typography.Text italic>{post.body}</Typography.Text>
                     </div>
                     <S.ImageContainer>
                         <Image src={mountainsImg} width={300} alt="mountain" />

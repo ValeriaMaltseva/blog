@@ -5,12 +5,12 @@ import RootLayout from 'layouts/RootLayout';
 
 import AppRouter from 'routes/AppRouter';
 
-function App() {
+const App = () => {
     return (
         <RootLayout>
             <RouterProvider router={AppRouter} />
         </RootLayout>
     );
-}
+};
 
 export default App;
